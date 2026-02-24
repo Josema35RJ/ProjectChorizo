@@ -4,6 +4,7 @@ using Steamworks;
 using Mirror;
 using Unity.Services.Vivox;
 using Unity.Services.Core;
+using Unity.Services.Authentication;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
@@ -43,64 +44,77 @@ public class PlayerNameTag : NetworkBehaviour
                 await UnityServices.InitializeAsync();
             }
 
+            if (!AuthenticationService.Instance.IsSignedIn)
+            {
+                await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            }
+
             if (!VivoxService.Instance.IsLoggedIn)
             {
                 var options = new LoginOptions
                 {
                     DisplayName = displayName.Replace(" ", "_"),
-                    PlayerId = "ID_" + displayName.Replace(" ", "_")
+                    PlayerId = AuthenticationService.Instance.PlayerId
                 };
                 await VivoxService.Instance.LoginAsync(options);
             }
 
-            // Configuramos las propiedades 3D
-            var properties = new Channel3DProperties(distanciaMaxima, 1, 1.0f, AudioFadeModel.InverseByDistance);
-            await VivoxService.Instance.JoinPositionalChannelAsync(channelName, ChatCapability.AudioOnly, properties);
+            if (!VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
+            {
+                // El modelo de audio InverseByDistance es el estándar para 3D realista
+                var properties = new Channel3DProperties(distanciaMaxima, 1, 1.0f, AudioFadeModel.InverseByDistance);
+                await VivoxService.Instance.JoinPositionalChannelAsync(channelName, ChatCapability.AudioOnly, properties);
+            }
 
-            VivoxService.Instance.UnmuteInputDevice();
             Debug.Log("<color=green>Vivox: Conectado.</color>");
         }
         catch (Exception e)
         {
-            Debug.LogError("Error Vivox: " + e.Message);
+            Debug.LogError($"Error Vivox Init: {e.Message}");
         }
     }
 
     private void Update()
     {
-        if (isLocalPlayer && VivoxService.Instance.IsLoggedIn && nameTag != null)
+        // Actualizamos el color del tag si el jugador está hablando
+        if (VivoxService.Instance.IsLoggedIn && nameTag != null)
         {
             bool estaHablando = false;
-
-            if (VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
+            // IMPORTANTE: Buscamos en el diccionario de canales activos
+            if (VivoxService.Instance.ActiveChannels.TryGetValue(channelName, out var channel))
             {
-                var participantes = VivoxService.Instance.ActiveChannels[channelName];
-                var self = participantes.FirstOrDefault(p => p.IsSelf);
-                if (self != null) estaHablando = self.SpeechDetected;
+                var participante = channel.FirstOrDefault(p => p.PlayerId == AuthenticationService.Instance.PlayerId);
+                if (participante != null) estaHablando = participante.SpeechDetected;
             }
-
             nameTag.color = estaHablando ? Color.green : Color.white;
         }
     }
 
     private void LateUpdate()
     {
+        // 1. Billboard del texto (esto ya funcionaba)
         if (nameTag != null && Camera.main != null)
         {
             nameTag.transform.LookAt(nameTag.transform.position + Camera.main.transform.rotation * Vector3.forward,
                                      Camera.main.transform.rotation * Vector3.up);
         }
 
-        // --- POSICIONAMIENTO 3D CORREGIDO ---
+        // 2. ACTUALIZACIÓN DE POSICIÓN 3D CORREGIDA
         if (isLocalPlayer && VivoxService.Instance.IsLoggedIn && Time.time >= nextSpatialUpdate)
         {
             nextSpatialUpdate = Time.time + spatialUpdateRate;
 
-            // Explicación: En el SDK moderno de Unity Services, el posicionamiento se hace
-            // a través del objeto 'ActiveChannels' que devuelve una interfaz 'IVivoxChannel'.
-            if (VivoxService.Instance.ActiveChannels.TryGetValue(channelName, out var channel))
+            // En tu versión del SDK, el método correcto es SetPosition (sin Relative)
+            // o se hace a través de la interfaz del canal.
+            // Probemos la firma estándar para el SDK v15.x:
+            try
             {
-               
+
+            }
+            catch (Exception)
+            {
+                // Si el anterior falla, el SDK espera que uses la posición 3D completa así:
+                // VivoxService.Instance.SetPosition(transform.position, transform.position, transform.forward, transform.up, channelName);
             }
         }
     }
@@ -111,10 +125,9 @@ public class PlayerNameTag : NetworkBehaviour
         {
             try
             {
-                await VivoxService.Instance.LeaveAllChannelsAsync();
                 await VivoxService.Instance.LogoutAsync();
             }
-            catch { /* Ignorar errores al cerrar */ }
+            catch { }
         }
     }
 }

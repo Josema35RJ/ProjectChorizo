@@ -1759,7 +1759,6 @@ GameObject:
   m_Component:
   - component: {fileID: 875813020}
   - component: {fileID: 875813019}
-  - component: {fileID: 875813021}
   - component: {fileID: 875813022}
   m_Layer: 0
   m_Name: CustomNetworkManager
@@ -1829,18 +1828,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &875813021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 875813018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d80f087915091a40aa087d38118a41a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &875813022
 MonoBehaviour:
   m_ObjectHideFlags: 0
