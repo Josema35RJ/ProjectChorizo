@@ -76,58 +76,73 @@ public class PlayerNameTag : NetworkBehaviour
 
     private void Update()
     {
-        // Actualizamos el color del tag si el jugador está hablando
-        if (VivoxService.Instance.IsLoggedIn && nameTag != null)
+        // Verificación de seguridad inicial
+        if (VivoxService.Instance == null || !VivoxService.Instance.IsLoggedIn || nameTag == null)
+            return;
+
+        bool estaHablando = false;
+
+        // Buscamos al participante en todos los canales activos
+        foreach (var channel in VivoxService.Instance.ActiveChannels.Values)
         {
-            bool estaHablando = false;
-            // IMPORTANTE: Buscamos en el diccionario de canales activos
-            if (VivoxService.Instance.ActiveChannels.TryGetValue(channelName, out var channel))
+            // Buscamos por PlayerId (que es el ID único de Unity Services)
+            var participant = channel.FirstOrDefault(p => p.DisplayName == playerName.Replace(" ", "_"));
+            if (participant != null && participant.SpeechDetected)
             {
-                var participante = channel.FirstOrDefault(p => p.PlayerId == AuthenticationService.Instance.PlayerId);
-                if (participante != null) estaHablando = participante.SpeechDetected;
+                estaHablando = true;
+                break;
             }
-            nameTag.color = estaHablando ? Color.green : Color.white;
         }
+
+        nameTag.color = estaHablando ? Color.green : Color.white;
     }
 
     private void LateUpdate()
     {
-        // 1. Billboard del texto (esto ya funcionaba)
+        // 1. Billboard (Mirar a la cámara)
         if (nameTag != null && Camera.main != null)
         {
             nameTag.transform.LookAt(nameTag.transform.position + Camera.main.transform.rotation * Vector3.forward,
                                      Camera.main.transform.rotation * Vector3.up);
         }
 
-        // 2. ACTUALIZACIÓN DE POSICIÓN 3D CORREGIDA
-        if (isLocalPlayer && VivoxService.Instance.IsLoggedIn && Time.time >= nextSpatialUpdate)
+
+        if (isLocalPlayer && VivoxService.Instance != null && VivoxService.Instance.IsLoggedIn && Time.time >= nextSpatialUpdate)
         {
             nextSpatialUpdate = Time.time + spatialUpdateRate;
 
-            // En tu versión del SDK, el método correcto es SetPosition (sin Relative)
-            // o se hace a través de la interfaz del canal.
-            // Probemos la firma estándar para el SDK v15.x:
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-                // Si el anterior falla, el SDK espera que uses la posición 3D completa así:
-                // VivoxService.Instance.SetPosition(transform.position, transform.position, transform.forward, transform.up, channelName);
-            }
+            // Según el error, el método requiere estos 6 parámetros:
+            VivoxService.Instance.Set3DPosition(
+                transform.position,     // speakerPos: donde sale tu voz
+                transform.position,     // listenerPos: donde escuchas (tus oídos)
+                transform.forward,      // forward: hacia donde miras
+                transform.up,           // up: vector hacia arriba
+                channelName,            // channelName: el nombre del canal
+                true                    // updateInput: ¿actualizar el micrófono? Sí.
+            );
         }
     }
 
     private async void OnDestroy()
     {
-        if (isLocalPlayer && VivoxService.Instance.IsLoggedIn)
+        // 1. Verificamos que sea el jugador local
+        // 2. Verificamos que la instancia de Vivox aún exista en memoria
+        if (isLocalPlayer && VivoxService.Instance != null)
         {
             try
             {
-                await VivoxService.Instance.LogoutAsync();
+                // Verificamos si realmente estamos logueados antes de intentar el logout
+                if (VivoxService.Instance.IsLoggedIn)
+                {
+                    await VivoxService.Instance.LogoutAsync();
+                    Debug.Log("Vivox: Logout completado con éxito.");
+                }
             }
-            catch { }
+            catch (Exception e)
+            {
+                // Silenciamos el error si el servicio ya no está disponible al cerrar
+                Debug.LogWarning($"Vivox Logout omitido o fallido: {e.Message}");
+            }
         }
     }
 }
