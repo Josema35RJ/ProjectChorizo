@@ -1795,7 +1795,7 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 1189618843407812, guid: 5a452a30441153e49994cd60206090c8,
     type: 3}
-  autoCreatePlayer: 0
+  autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
   exceptionsDisconnect: 1
@@ -2238,7 +2238,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1919424402}
   m_HandleRect: {fileID: 1919424401}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
