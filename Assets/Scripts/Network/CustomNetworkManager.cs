@@ -1,9 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    //This runs only on Client
+    // This runs only on Client
     public override void OnClientSceneChanged()
     {
         base.OnClientSceneChanged();
@@ -14,7 +16,7 @@ public class CustomNetworkManager : NetworkManager
         Debug.Log("client's scene changed");
     }
 
-    //This runs only on Host-Server 
+    // This runs only on Host-Server 
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName); 
@@ -22,12 +24,12 @@ public class CustomNetworkManager : NetworkManager
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
-        // ELIMINADO: SpawnAllPlayers(); 
-        // Mirror instanciará los jugadores automáticamente de forma segura.
+        // Eliminado: SpawnAllPlayers() y lógicas manuales. 
+        // Mirror se encarga de instanciar a los jugadores automáticamente cuando la escena del cliente termina de cargar.
         Debug.Log("host's scene changed");
     }
     
-    public void ChangeScene() //Calling by pressing Start Button, set from inspector.
+    public void ChangeScene() // Calling by pressing Start Button, set from inspector.
     {
         if (NetworkServer.active)
         {
@@ -39,5 +41,27 @@ public class CustomNetworkManager : NetworkManager
     public void ChangingScene()
     {
         ServerChangeScene("GameScene");
+    }
+
+    // =================================================================
+    // --- LOGS DE DEPURACIÓN PARA VERIFICAR LA CONEXIÓN DE MIRROR ---
+    // =================================================================
+    
+    public override void OnServerConnect(NetworkConnectionToClient conn)
+    {
+        base.OnServerConnect(conn);
+        Debug.Log("<color=green>SERVIDOR: Un cliente se ha conectado a Mirror exitosamente.</color>");
+    }
+
+    public override void OnClientConnect()
+    {
+        base.OnClientConnect();
+        Debug.Log("<color=blue>CLIENTE: Me he conectado al Host de Mirror exitosamente.</color>");
+    }
+
+    public override void OnClientDisconnect()
+    {
+        base.OnClientDisconnect();
+        Debug.Log("<color=red>CLIENTE: Desconectado o conexión fallida con el Host de Mirror.</color>");
     }
 }
