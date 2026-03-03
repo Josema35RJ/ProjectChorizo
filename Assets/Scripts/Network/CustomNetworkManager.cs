@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    
     //This runs only on Client
     public override void OnClientSceneChanged()
     {
@@ -25,39 +22,17 @@ public class CustomNetworkManager : NetworkManager
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
-        SpawnAllPlayers();
+        // ELIMINADO: SpawnAllPlayers(); 
+        // Mirror instanciará los jugadores automáticamente de forma segura.
         Debug.Log("host's scene changed");
-    }
-    
-    private void SpawnAllPlayers()
-    {
-        if (!NetworkServer.active) return;
-        NetworkClient.Ready(); //Necessary because the base.OnServerSceneChanged() don't call Ready().
-        
-        // spawn clients
-        foreach (NetworkConnectionToClient conn in NetworkServer.connections.Values)
-        {
-            if (conn != null && conn.identity == null)
-            {
-                SpawnPlayerForConnection(conn);
-            }
-        }
-    }
-    
-    private void SpawnPlayerForConnection(NetworkConnectionToClient conn)
-    {
-        GameObject player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        NetworkServer.AddPlayerForConnection(conn, player); // only host calls
     }
     
     public void ChangeScene() //Calling by pressing Start Button, set from inspector.
     {
         if (NetworkServer.active)
         {
-           
             // CHANGE SCENE
-            Invoke("ChangingScene",3f);
-            
+            Invoke(nameof(ChangingScene), 3f);
         }
     }
 
@@ -65,5 +40,4 @@ public class CustomNetworkManager : NetworkManager
     {
         ServerChangeScene("GameScene");
     }
-
 }
