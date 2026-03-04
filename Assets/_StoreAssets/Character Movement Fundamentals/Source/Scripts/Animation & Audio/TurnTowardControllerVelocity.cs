@@ -4,101 +4,116 @@ using UnityEngine;
 
 namespace CMF
 {
-	//This script turns a gameobject toward the target controller's velocity direction;
-	public class TurnTowardControllerVelocity : MonoBehaviour {
+    // Este script mantiene el movimiento original de CMF pero previene el error NullReferenceException
+    public class TurnTowardControllerVelocity : MonoBehaviour
+    {
 
-		//Target controller;
-		public Controller controller;
+        // Target controller;
+        public Controller controller;
 
-		//Speed at which this gameobject turns toward the controller's velocity;
-		public float turnSpeed = 500f;
+        // Speed at which this gameobject turns toward the controller's velocity;
+        public float turnSpeed = 500f;
 
-		Transform parentTransform;
-		Transform tr;
+        Transform parentTransform;
+        Transform tr;
 
-		//Current (local) rotation around the (local) y axis of this gameobject;
-		float currentYRotation = 0f;
+        // Current (local) rotation around the (local) y axis of this gameobject;
+        float currentYRotation = 0f;
 
-		//If the angle between the current and target direction falls below 'fallOffAngle', 'turnSpeed' becomes progressively slower (and eventually approaches '0f');
-		//This adds a smoothing effect to the rotation;
-		float fallOffAngle = 90f;
+        // Smoothing effect;
+        float fallOffAngle = 90f;
 
-		//Whether the current controller momentum should be ignored when calculating the new direction;
-		public bool ignoreControllerMomentum = false;
+        // Whether the current controller momentum should be ignored;
+        public bool ignoreControllerMomentum = false;
 
-		//Setup;
-		void Start () {
-			tr = transform;
-			parentTransform = tr.parent;
+        // Setup;
+        void Start()
+        {
+            tr = transform;
+            parentTransform = tr.parent;
 
-			//Throw warning if no controller has been assigned;
-			if(controller == null)
-			{
-				Debug.LogWarning("No controller script has been assigned to this 'TurnTowardControllerVelocity' component!", this);
-				this.enabled = false;
-			}	
-		}
+            // INTENTO DE AUTO-ASIGNACIÓN:
+            // Si el controlador es nulo, intenta buscarlo en el objeto o en el padre
+            // Esto evita que tengas que asignarlo a mano tras borrar componentes
+            if (controller == null)
+            {
+                controller = GetComponentInParent<Controller>();
+            }
 
-		void LateUpdate () {
+            if (controller == null)
+            {
+                Debug.LogWarning("No se ha asignado un 'Controller' a " + gameObject.name + ". El script se desactivará para evitar errores.", this);
+                this.enabled = false;
+            }
+        }
 
-			//Get controller velocity;
-			Vector3 _velocity;
-			if(ignoreControllerMomentum)
-				_velocity = controller.GetMovementVelocity();
-			else
-				_velocity = controller.GetVelocity();
+        void LateUpdate()
+        {
 
-			//Project velocity onto a plane defined by the 'up' direction of the parent transform;
-			_velocity = Vector3.ProjectOnPlane(_velocity, parentTransform.up);
+            // ESCUDO DE SEGURIDAD:
+            // Si el controlador es nulo (por red o carga de escena), salimos antes de que ocurra el error
+            if (controller == null) return;
 
-			float _magnitudeThreshold = 0.001f;
+            // Get controller velocity;
+            Vector3 _velocity;
+            if (ignoreControllerMomentum)
+                _velocity = controller.GetMovementVelocity();
+            else
+                _velocity = controller.GetVelocity();
 
-			//If the velocity's magnitude is smaller than the threshold, return;
-			if(_velocity.magnitude < _magnitudeThreshold)
-				return;
+            // Project velocity onto a plane defined by the 'up' direction of the parent transform;
+            // Usamos Vector3.up como respaldo si no hay padre
+            Vector3 _upVector = (parentTransform != null) ? parentTransform.up : Vector3.up;
+            _velocity = Vector3.ProjectOnPlane(_velocity, _upVector);
 
-			//Normalize velocity direction;
-			_velocity.Normalize();
+            float _magnitudeThreshold = 0.001f;
 
-			//Get current 'forward' vector;
-			Vector3 _currentForward = tr.forward;
+            // If the velocity's magnitude is smaller than the threshold, return;
+            if (_velocity.magnitude < _magnitudeThreshold)
+                return;
 
-			//Calculate (signed) angle between velocity and forward direction;
-			float _angleDifference = VectorMath.GetAngle(_currentForward, _velocity, parentTransform.up);
+            // Normalize velocity direction;
+            _velocity.Normalize();
 
-			//Calculate angle factor;
-			float _factor = Mathf.InverseLerp(0f, fallOffAngle, Mathf.Abs(_angleDifference));
+            // Get current 'forward' vector;
+            Vector3 _currentForward = tr.forward;
 
-			//Calculate this frame's step;
-			float _step = Mathf.Sign(_angleDifference) * _factor * Time.deltaTime * turnSpeed;
+            // Calculate (signed) angle between velocity and forward direction;
+            float _angleDifference = VectorMath.GetAngle(_currentForward, _velocity, _upVector);
 
-			//Clamp step;
-			if(_angleDifference < 0f && _step < _angleDifference)
-				_step = _angleDifference;
-			else if(_angleDifference > 0f && _step > _angleDifference)
-				_step = _angleDifference;
+            // Calculate angle factor (Smoothing original);
+            float _factor = Mathf.InverseLerp(0f, fallOffAngle, Mathf.Abs(_angleDifference));
 
-			//Add step to current y angle;
-			currentYRotation += _step;
+            // Calculate this frame's step;
+            float _step = Mathf.Sign(_angleDifference) * _factor * Time.deltaTime * turnSpeed;
 
-			//Clamp y angle;
-			if(currentYRotation > 360f)
-				currentYRotation -= 360f;
-			if(currentYRotation < -360f)
-				currentYRotation += 360f;
+            // Clamp step;
+            if (_angleDifference < 0f && _step < _angleDifference)
+                _step = _angleDifference;
+            else if (_angleDifference > 0f && _step > _angleDifference)
+                _step = _angleDifference;
 
-			//Set transform rotation using Quaternion.Euler;
-			tr.localRotation = Quaternion.Euler(0f, currentYRotation, 0f);
+            // Add step to current y angle;
+            currentYRotation += _step;
 
-		}
+            // Clamp y angle;
+            if (currentYRotation > 360f)
+                currentYRotation -= 360f;
+            if (currentYRotation < -360f)
+                currentYRotation += 360f;
 
-		void OnDisable()
-		{ 
-		}
+            // Set transform rotation using Quaternion.Euler;
+            tr.localRotation = Quaternion.Euler(0f, currentYRotation, 0f);
 
-		void OnEnable()
-		{
-			currentYRotation = transform.localEulerAngles.y;
-		}
-	}
+        }
+
+        void OnDisable()
+        {
+        }
+
+        void OnEnable()
+        {
+            currentYRotation = transform.localEulerAngles.y;
+        }
+    }
 }

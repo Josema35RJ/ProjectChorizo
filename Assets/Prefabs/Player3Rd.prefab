@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea00ad25c692c9d4881f3c19e75ca56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 0}
+  controller: {fileID: -7488465873563800175}
   turnSpeed: 1500
   ignoreControllerMomentum: 0
 --- !u!114 &4828464851967396200
@@ -179,15 +179,16 @@ GameObject:
   - component: {fileID: 54247263789400272}
   - component: {fileID: 114808892733143080}
   - component: {fileID: 7442800834140172299}
-  - component: {fileID: 114611966454256686}
   - component: {fileID: -7248506572719617129}
   - component: {fileID: 4136974530054710152}
   - component: {fileID: 1926354744543443417}
   - component: {fileID: -1875703483867997965}
   - component: {fileID: 5310817766423843871}
   - component: {fileID: -1339545571148665347}
-  - component: {fileID: 2205425162112287978}
-  - component: {fileID: -8531618509121673999}
+  - component: {fileID: -7488465873563800175}
+  - component: {fileID: -6322309290043450335}
+  - component: {fileID: -3396877785390117518}
+  - component: {fileID: 673899750502463715}
   m_Layer: 0
   m_Name: Player3Rd
   m_TagString: Player
@@ -307,27 +308,6 @@ MonoBehaviour:
   verticalInputAxis: Vertical
   jumpKey: 32
   useRawInput: 1
---- !u!114 &114611966454256686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1189618843407812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d296f3412ce1434a84b75a9a8ec966e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncDirection: 0
-  syncMode: 0
-  syncInterval: 0
-  velocityThreshold: 0.1
-  footstepDistance: 3
-  footstepClips: []
-  jumpClip: {fileID: 8300000, guid: 99ab8a4503de1f448ad764a5c4cdf9cc, type: 3}
-  landClip: {fileID: 8300000, guid: c212aa2d646dfe248b7c96b4f0e4cb27, type: 3}
-  spatialBlend3D: 1
 --- !u!114 &-7248506572719617129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,7 +525,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2205425162112287978
+--- !u!114 &-7488465873563800175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -568,7 +548,7 @@ MonoBehaviour:
   slopeLimit: 80
   useLocalMomentum: 0
   cameraTransform: {fileID: 0}
---- !u!114 &-8531618509121673999
+--- !u!114 &-6322309290043450335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -583,12 +563,48 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  animator: {fileID: 0}
-  nAnimator: {fileID: 0}
+  animator: {fileID: 95248922535779116}
+  nAnimator: {fileID: 3366770469990573769}
   useStrafeAnimations: 0
   landVelocityThreshold: 5
   smoothingFactor: 40
   dashCooldown: 1.2
+--- !u!114 &-3396877785390117518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189618843407812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d296f3412ce1434a84b75a9a8ec966e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CMF.AudioControl
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  velocityThreshold: 0.1
+  footstepDistance: 2.5
+  footstepClips: []
+  jumpClip: {fileID: 8300000, guid: 99ab8a4503de1f448ad764a5c4cdf9cc, type: 3}
+  landClip: {fileID: 8300000, guid: c212aa2d646dfe248b7c96b4f0e4cb27, type: 3}
+  spatialBlend3D: 1
+--- !u!114 &673899750502463715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1189618843407812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea00ad25c692c9d4881f3c19e75ca56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CMF.TurnTowardControllerVelocity
+  controller: {fileID: -7488465873563800175}
+  turnSpeed: 500
+  ignoreControllerMomentum: 0
 --- !u!1 &1234082977098520
 GameObject:
   m_ObjectHideFlags: 0
