@@ -12,24 +12,35 @@ public class LocalComponentChecker : NetworkBehaviour
     
     private void Start()
     {
-        // Solo apagamos los componentes de los personajes de los DEMÁS jugadores
         if (!isLocalPlayer)
         {
             mover = GetComponent<Mover>();
             advancedWalkerController = GetComponent<AdvancedWalkerController>();
             characterKeyboardInput = GetComponent<CharacterKeyboardInput>();
 
-            // DESACTIVAR en lugar de destruir. Esto evita el error de dependencias.
+            // DESACTIVAR componentes de movimiento
             if (mover != null) mover.enabled = false;
             if (advancedWalkerController != null) advancedWalkerController.enabled = false;
             if (characterKeyboardInput != null) characterKeyboardInput.enabled = false;
-            
-            // También puedes obtener y desactivar el AudioControl y AnimationControl aquí si lo deseas
-            // var audioControl = GetComponent<AudioControl>();
-            // if (audioControl != null) audioControl.enabled = false;
 
-            // Desactivar la cámara del jugador clon
+            // Apagar la cámara del clon
             if (playerCam != null) playerCam.SetActive(false);
+
+            // NUEVO: Buscar y apagar CUALQUIER AudioListener en este clon (para que no haya orejas dobles)
+            AudioListener[] listeners = GetComponentsInChildren<AudioListener>(true);
+            foreach (AudioListener listener in listeners)
+            {
+                listener.enabled = false;
+            }
+        }
+        else
+        {
+            // (Opcional) Si este ES el jugador local, apagar la cámara por defecto de la escena para evitar conflictos
+            Camera mainCam = Camera.main;
+            if (mainCam != null && mainCam.gameObject != playerCam)
+            {
+                mainCam.gameObject.SetActive(false);
+            }
         }
     }
 }
