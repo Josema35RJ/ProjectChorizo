@@ -1,45 +1,82 @@
 using UnityEngine;
+using Mirror;
 
-public class CogerObjeto : MonoBehaviour
+// Cambiamos MonoBehaviour por NetworkBehaviour
+public class CogerObjeto : NetworkBehaviour
 {
     public GameObject handPoint;
     private GameObject pickedObject = null;
-    private GameObject objectInRange = null; // Guardamos el objeto que estamos tocando
+    private GameObject objectInRange = null; 
 
     void Update()
     {
+        // MUY IMPORTANTE: Solo queremos que el jugador local pueda usar estas teclas.
+        // Evita que al pulsar 'E', todos los clones de tu personaje intenten coger algo.
+        if (!isLocalPlayer) return;
+
         // SOLTAR OBJETO
         if (pickedObject != null && Input.GetKeyDown(KeyCode.Q))
         {
-            DropObject();
+            CmdDropObject(); // Le pedimos al servidor que suelte el objeto
         }
 
         // COGER OBJETO
-        // Usamos GetKeyDown para que solo detecte un pulso al presionar
         if (objectInRange != null && pickedObject == null && Input.GetKeyDown(KeyCode.E))
         {
-            PickUpObject(objectInRange);
+            // Buscamos la identidad de red del objeto para pasársela al servidor
+            NetworkIdentity netId = objectInRange.GetComponent<NetworkIdentity>();
+            if (netId != null)
+            {
+                CmdPickUpObject(netId); // Le pedimos al servidor coger este objeto exacto
+            }
         }
     }
 
-    private void PickUpObject(GameObject obj)
+    // [Command] se ejecuta SOLO en el Servidor (El host)
+    [Command]
+    private void CmdPickUpObject(NetworkIdentity objNetId)
     {
-        pickedObject = obj;
+        // Opcional: Aquí podrías comprobar si el objeto ya ha sido cogido por otro jugador
+        // para evitar que dos personas lo cojan a la vez.
+
+        // El servidor le dice a TODOS los clientes que este jugador agarró el objeto
+        RpcPickUpObject(objNetId);
+    }
+
+    // [ClientRpc] lo reciben TODOS los jugadores de la partida al mismo tiempo
+    [ClientRpc]
+    private void RpcPickUpObject(NetworkIdentity objNetId)
+    {
+        pickedObject = objNetId.gameObject;
         Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
 
+        // Desactivamos físicas para que no se caiga ni colisione loco en la mano
         if (rb != null)
         {
             rb.isKinematic = true;
             rb.useGravity = false;
         }
 
+        // Lo emparentamos a la mano de ESTE personaje en la pantalla de todos
         pickedObject.transform.SetParent(handPoint.transform);
         pickedObject.transform.localPosition = Vector3.zero;
         pickedObject.transform.localRotation = Quaternion.identity;
     }
 
-    private void DropObject()
+    [Command]
+    private void CmdDropObject()
     {
+        if (pickedObject != null)
+        {
+            RpcDropObject(); // El servidor ordena a todos soltarlo
+        }
+    }
+
+    [ClientRpc]
+    private void RpcDropObject()
+    {
+        if (pickedObject == null) return;
+
         Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -54,6 +91,9 @@ public class CogerObjeto : MonoBehaviour
     // Detectamos si entramos o salimos de la zona del objeto
     private void OnTriggerEnter(Collider other)
     {
+        // Solo el jugador local necesita detectar la colisión para que le aparezca el prompt de coger
+        if (!isLocalPlayer) return;
+
         if (other.CompareTag("Objets"))
         {
             objectInRange = other.gameObject;
@@ -62,9 +102,14 @@ public class CogerObjeto : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!isLocalPlayer) return;
+
         if (other.CompareTag("Objets"))
         {
-            objectInRange = null;
+            if (objectInRange == other.gameObject)
+            {
+                objectInRange = null;
+            }
         }
     }
 }
