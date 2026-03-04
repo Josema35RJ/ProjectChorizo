@@ -14,82 +14,70 @@ public class CogerObjeto : NetworkBehaviour
         // SOLTAR OBJETO
         if (pickedObject != null && Input.GetKeyDown(KeyCode.Q))
         {
-            NetworkIdentity netId = pickedObject.GetComponent<NetworkIdentity>();
-            if (netId != null)
-            {
-                CmdDropObject(netId);
-            }
+            CmdDropObject(pickedObject);
         }
 
         // COGER OBJETO
         if (objectInRange != null && pickedObject == null && Input.GetKeyDown(KeyCode.E))
         {
-            NetworkIdentity netId = objectInRange.GetComponent<NetworkIdentity>();
-            
-            // Solo intentamos cogerlo si nadie más tiene la autoridad (nadie más lo tiene en la mano)
-            if (netId != null && netId.connectionToClient == null)
-            {
-                CmdPickUpObject(netId);
-            }
+            CmdPickUpObject(objectInRange);
         }
     }
 
     [Command]
-    private void CmdPickUpObject(NetworkIdentity objNetId)
+    private void CmdPickUpObject(GameObject obj)
     {
-        // 1. Le damos AUTORIDAD de red a este jugador para que sus físicas manden
-        objNetId.AssignClientAuthority(connectionToClient);
-        
-        // 2. Avisamos a todos para que lo emparenten a la mano
-        RpcPickUpObject(objNetId);
-    }
-
-    [ClientRpc]
-    private void RpcPickUpObject(NetworkIdentity objNetId)
-    {
-        pickedObject = objNetId.gameObject;
-        Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
-
+        // 1. EL SERVIDOR apaga la física para que deje de chocar o caer
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.isKinematic = true;  // Apagamos físicas en la mano
+            rb.isKinematic = true;
             rb.useGravity = false;
         }
 
-        pickedObject.transform.SetParent(handPoint.transform);
-        pickedObject.transform.localPosition = Vector3.zero;
-        pickedObject.transform.localRotation = Quaternion.identity;
-    }
-
-    [Command]
-    private void CmdDropObject(NetworkIdentity objNetId)
-    {
-        // 1. Avisamos a todos de que lo suelten y enciendan las físicas
-        RpcDropObject(objNetId);
-
-        // 2. Le QUITAMOS la autoridad al jugador para que el Servidor vuelva a calcular la caída
-        objNetId.RemoveClientAuthority();
+        // 2. Avisamos a todos para que lo peguen a la mano
+        RpcPickUpObject(obj);
     }
 
     [ClientRpc]
-    private void RpcDropObject(NetworkIdentity objNetId)
+    private void RpcPickUpObject(GameObject obj)
     {
-        if (objNetId == null) return;
+        // Solo el jugador que pulsó la E se lo guarda como su objeto agarrado
+        if (isLocalPlayer && obj == objectInRange)
+        {
+            pickedObject = obj;
+        }
 
-        GameObject objToDrop = objNetId.gameObject;
-        Rigidbody rb = objToDrop.GetComponent<Rigidbody>();
-        
-        // ¡Aquí recupera las físicas en todas las pantallas!
+        // Todos los clientes lo emparentan a la mano de tu avatar
+        obj.transform.SetParent(handPoint.transform);
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
+    }
+
+    [Command]
+    private void CmdDropObject(GameObject obj)
+    {
+        // 1. EL SECRETO: El Servidor enciende la física aquí. 
+        // Como él manda (Server To Client), empezará a caer y todos lo verán caer.
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
         }
 
-        objToDrop.transform.SetParent(null);
+        // 2. Ordenamos a los clientes soltarlo visualmente
+        RpcDropObject(obj);
+    }
 
-        // Limpiamos la variable solo para el jugador que lo tenía agarrado
-        if (pickedObject == objToDrop)
+    [ClientRpc]
+    private void RpcDropObject(GameObject obj)
+    {
+        // Desemparentamos
+        obj.transform.SetParent(null);
+
+        // Limpiamos la variable solo en tu pantalla
+        if (isLocalPlayer && pickedObject == obj)
         {
             pickedObject = null;
         }
@@ -98,17 +86,12 @@ public class CogerObjeto : NetworkBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!isLocalPlayer) return;
-
-        if (other.CompareTag("Objets"))
-        {
-            objectInRange = other.gameObject;
-        }
+        if (other.CompareTag("Objets")) objectInRange = other.gameObject;
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!isLocalPlayer) return;
-
         if (other.CompareTag("Objets") && objectInRange == other.gameObject)
         {
             objectInRange = null;
