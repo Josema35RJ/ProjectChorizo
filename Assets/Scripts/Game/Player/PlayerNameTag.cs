@@ -22,7 +22,6 @@ public class PlayerNameTag : NetworkBehaviour
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
 
-    // Estados de control para evitar errores de Vivox
     private static bool _estaInicializandoServicios = false;
     private static bool _estaLogueandoVivox = false;
 
@@ -31,15 +30,37 @@ public class PlayerNameTag : NetworkBehaviour
 
     public override void OnStartLocalPlayer()
     {
-        // 1. Configurar nombre desde Steam o Random
+        // Iniciamos una corrutina para esperar a que la red esté lista
+        StartCoroutine(SetupPlayerRoutine());
+    }
+
+    private IEnumerator SetupPlayerRoutine()
+    {
+        // ESPERA CRÍTICA: Esperamos a que la conexión de Mirror sea estable
+        // y el transporte (Steam) haya terminado el apretón de manos.
+        while (!NetworkClient.ready || !NetworkClient.isConnected)
+        {
+            yield return null;
+        }
+
+        // Un pequeño respiro extra para asegurar que el socket de Steam no dé "NoConnection"
+        yield return new WaitForSeconds(0.5f);
+
+        // 1. Configurar nombre
         string steamName = SteamClient.IsValid ? SteamClient.Name : "Jugador_" + UnityEngine.Random.Range(100, 999);
+
+        // Ahora es seguro enviar el Command
         CmdSetPlayerName(steamName);
 
-        // 2. Iniciar Vivox de forma segura
+        // 2. Iniciar Vivox
         _ = IniciarVoz(steamName);
     }
 
-    [Command] void CmdSetPlayerName(string name) => playerName = name;
+    [Command]
+    void CmdSetPlayerName(string name)
+    {
+        playerName = name;
+    }
 
     void OnNameChanged(string old, string n)
     {
@@ -50,7 +71,6 @@ public class PlayerNameTag : NetworkBehaviour
     {
         try
         {
-            // Evitar que múltiples instancias inicialicen servicios al mismo tiempo
             if (UnityServices.State == ServicesInitializationState.Uninitialized)
             {
                 if (_estaInicializandoServicios) return;
@@ -64,7 +84,6 @@ public class PlayerNameTag : NetworkBehaviour
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
             }
 
-            // Evitar el error "Already signing in"
             if (!VivoxService.Instance.IsLoggedIn)
             {
                 if (_estaLogueandoVivox) return;
@@ -80,32 +99,26 @@ public class PlayerNameTag : NetworkBehaviour
                 _estaLogueandoVivox = false;
             }
 
-            // Unirse al canal si no estamos en él
             if (VivoxService.Instance.IsLoggedIn && !VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
             {
                 var properties = new Channel3DProperties(distanciaMaxima, 1, 1.0f, AudioFadeModel.InverseByDistance);
                 await VivoxService.Instance.JoinPositionalChannelAsync(channelName, ChatCapability.AudioOnly, properties);
             }
-
-            Debug.Log("<color=green>Vivox: Conectado y en canal posicional.</color>");
         }
         catch (Exception e)
         {
             _estaInicializandoServicios = false;
             _estaLogueandoVivox = false;
-            Debug.LogError($"Error Vivox Init: {e.Message}");
+            Debug.LogError($"Error Vivox: {e.Message}");
         }
     }
 
     private void Update()
     {
-        // Solo verificamos si alguien habla si Vivox está listo y el objeto tiene nombre
         if (VivoxService.Instance == null || !VivoxService.Instance.IsLoggedIn || string.IsNullOrEmpty(playerName) || nameTag == null)
             return;
 
         bool estaHablando = false;
-
-        // Comprobamos si este jugador específico está hablando
         foreach (var channel in VivoxService.Instance.ActiveChannels.Values)
         {
             var participant = channel.FirstOrDefault(p => p.DisplayName == playerName.Replace(" ", "_"));
@@ -115,55 +128,36 @@ public class PlayerNameTag : NetworkBehaviour
                 break;
             }
         }
-
         nameTag.color = estaHablando ? Color.green : Color.white;
     }
 
     private void LateUpdate()
     {
-        // 1. Billboard (Mirar a la cámara)
         if (nameTag != null && Camera.main != null)
         {
             nameTag.transform.LookAt(nameTag.transform.position + Camera.main.transform.rotation * Vector3.forward,
                                      Camera.main.transform.rotation * Vector3.up);
         }
 
-        // 2. Actualizar posición 3D (Solo para el jugador local)
         if (isLocalPlayer && VivoxService.Instance != null && VivoxService.Instance.IsLoggedIn && Time.time >= nextSpatialUpdate)
         {
             nextSpatialUpdate = Time.time + spatialUpdateRate;
-
             if (VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
             {
-                VivoxService.Instance.Set3DPosition(
-                    transform.position,    // speakerPos
-                    transform.position,    // listenerPos
-                    transform.forward,     // forward
-                    transform.up,          // up
-                    channelName,           // channelName
-                    true                   // updateInput
-                );
+                VivoxService.Instance.Set3DPosition(transform.position, transform.position, transform.forward, transform.up, channelName, true);
             }
         }
     }
 
     private async void OnDestroy()
     {
-        // Limpieza al destruir el objeto
         if (isLocalPlayer && VivoxService.Instance != null)
         {
             try
             {
-                if (VivoxService.Instance.IsLoggedIn)
-                {
-                    await VivoxService.Instance.LogoutAsync();
-                    Debug.Log("Vivox: Logout completado.");
-                }
+                if (VivoxService.Instance.IsLoggedIn) await VivoxService.Instance.LogoutAsync();
             }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"Vivox Logout omitido: {e.Message}");
-            }
+            catch { /* Ignorar errores al cerrar */ }
         }
     }
 }
