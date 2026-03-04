@@ -5,48 +5,63 @@ using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    // This runs only on Client
+    // --- LÓGICA DE ESCENAS ---
+
     public override void OnClientSceneChanged()
     {
+        // No llamamos a base.OnClientSceneChanged() para tener control total o 
+        // lo llamamos al final. Aquí bloqueamos el cursor.
         base.OnClientSceneChanged();
-        
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        
-        Debug.Log("client's scene changed");
+
+        ConfigurarCursor();
+        Debug.Log("CLIENTE: Escena cambiada y cursor configurado.");
     }
 
-    // This runs only on Host-Server 
     public override void OnServerSceneChanged(string sceneName)
     {
-        base.OnServerSceneChanged(sceneName); 
+        base.OnServerSceneChanged(sceneName);
+        ConfigurarCursor();
+        Debug.Log($"SERVIDOR: Escena cambiada a {sceneName}");
+    }
 
+    private void ConfigurarCursor()
+    {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        
-        // Eliminado: SpawnAllPlayers() y lógicas manuales. 
-        // Mirror se encarga de instanciar a los jugadores automáticamente cuando la escena del cliente termina de cargar.
-        Debug.Log("host's scene changed");
     }
-    
-    public void ChangeScene() // Calling by pressing Start Button, set from inspector.
+
+    // --- CARGA DE JUEGO ---
+
+    public void ChangeScene()
     {
         if (NetworkServer.active)
         {
-            // CHANGE SCENE
+            // Es buena práctica usar ServerChangeScene directamente si no necesitas el delay.
+            // Si necesitas el delay de 3s, Invoke está bien.
             Invoke(nameof(ChangingScene), 3f);
         }
     }
 
-    public void ChangingScene()
+    private void ChangingScene()
     {
         ServerChangeScene("GameScene");
     }
 
-    // =================================================================
-    // --- LOGS DE DEPURACIÓN PARA VERIFICAR LA CONEXIÓN DE MIRROR ---
-    // =================================================================
-    
+
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
+    {
+
+        if (conn.identity != null)
+        {
+            Debug.LogWarning($"[Mirror] El cliente {conn.connectionId} ya tiene un jugador. Saltando OnServerAddPlayer.");
+            return;
+        }
+
+        base.OnServerAddPlayer(conn);
+    }
+
+    // --- LOGS DE DEPURACIÓN ---
+
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
         base.OnServerConnect(conn);
@@ -55,13 +70,15 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnClientConnect()
     {
+        // IMPORTANTE: Si usas AddPlayer manual en algún sitio, aquí es donde suele romperse.
+        // Como dependemos del "Auto Create Player" del Inspector, solo llamamos al base.
         base.OnClientConnect();
-        Debug.Log("<color=blue>CLIENTE: Me he conectado al Host de Mirror exitosamente.</color>");
+        Debug.Log("<color=blue>CLIENTE: Me he conectado al Host de Mirror.</color>");
     }
 
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-        Debug.Log("<color=red>CLIENTE: Desconectado o conexión fallida con el Host de Mirror.</color>");
+        Debug.Log("<color=red>CLIENTE: Desconectado o conexión fallida.</color>");
     }
 }
