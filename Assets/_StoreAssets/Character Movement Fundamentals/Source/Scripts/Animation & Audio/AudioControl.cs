@@ -6,8 +6,8 @@ using UnityEngine;
 namespace CMF
 {
     [RequireComponent(typeof(Controller))]
-    [RequireComponent(typeof(AudioSource))]
     [RequireComponent(typeof(NetworkIdentity))]
+    // Quitamos el RequireComponent de AudioSource para manejarlo nosotros manualmente y evitar errores
     public class AudioControl : NetworkBehaviour
     {
         private Controller controller;
@@ -25,38 +25,57 @@ namespace CMF
         public AudioClip landClip;
 
         [Header("Ajustes de Red")]
-        [Range(0, 1)] public float spatialBlend3D = 1.0f; // 1 = Totalmente 3D
+        [Range(0, 1)] public float spatialBlend3D = 1.0f;
 
         private void Awake()
         {
             controller = GetComponent<Controller>();
-            audioSource = GetComponent<AudioSource>();
             tr = transform;
 
-            // Configuración profesional del AudioSource por código
-            audioSource.spatialBlend = spatialBlend3D;
-            audioSource.rolloffMode = AudioRolloffMode.Linear;
-            audioSource.minDistance = 1f;
-            audioSource.maxDistance = 20f;
-            audioSource.playOnAwake = false;
+            // Intentamos obtener el AudioSource
+            audioSource = GetComponent<AudioSource>();
+
+            // Si no existe, lo añadimos dinámicamente para evitar el MissingComponentException
+            if (audioSource == null)
+            {
+                audioSource = gameObject.AddComponent<AudioSource>();
+                Debug.LogWarning($"[AudioControl] No se encontró AudioSource en {gameObject.name}. Se ha añadido uno automáticamente.");
+            }
+
+            // Configuración segura
+            if (audioSource != null)
+            {
+                audioSource.spatialBlend = spatialBlend3D;
+                audioSource.rolloffMode = AudioRolloffMode.Linear;
+                audioSource.minDistance = 1f;
+                audioSource.maxDistance = 20f;
+                audioSource.playOnAwake = false;
+            }
         }
 
         private void OnEnable()
         {
-            controller.OnLand += HandleOnLand;
-            controller.OnJump += HandleOnJump;
+            // Verificación de nulidad para evitar errores si el inicio falló
+            if (controller != null)
+            {
+                controller.OnLand += HandleOnLand;
+                controller.OnJump += HandleOnJump;
+            }
         }
 
         private void OnDisable()
         {
-            controller.OnLand -= HandleOnLand;
-            controller.OnJump -= HandleOnJump;
+            // Verificación de nulidad CRÍTICA para evitar el segundo error que mencionaste
+            if (controller != null)
+            {
+                controller.OnLand -= HandleOnLand;
+                controller.OnJump -= HandleOnJump;
+            }
         }
 
         private void Update()
         {
-            // Solo el dueño calcula cuándo debe sonar un paso
-            if (!isLocalPlayer) return;
+            if (!isLocalPlayer || !NetworkClient.ready || controller == null) return;
 
             Vector3 velocity = controller.GetVelocity();
             Vector3 horizontalVelocity = VectorMath.RemoveDotVector(velocity, tr.up);
@@ -72,44 +91,28 @@ namespace CMF
             }
         }
 
-        #region Lógica de Pasos
-
         private void RequestFootstepSound()
         {
             if (footstepClips.Length == 0) return;
             int index = Random.Range(0, footstepClips.Length);
 
-            // 1. Sonido local (instantáneo para el jugador)
             PlayLocalSound(footstepClips[index], 0.8f);
-
-            // 2. Avisar al servidor para que los demás lo oigan
             CmdPlayFootstep(index);
         }
 
         [Command]
-        private void CmdPlayFootstep(int clipIndex)
-        {
-            // El servidor le dice a todos (excepto al que lo envió) que suene el paso
-            RpcPlayFootstep(clipIndex);
-        }
+        private void CmdPlayFootstep(int clipIndex) => RpcPlayFootstep(clipIndex);
 
         [ClientRpc(includeOwner = false)]
         private void RpcPlayFootstep(int clipIndex)
         {
             if (clipIndex >= 0 && clipIndex < footstepClips.Length)
-            {
                 PlayLocalSound(footstepClips[clipIndex], 0.6f);
-            }
         }
-
-        #endregion
-
-        #region Salto y Aterrizaje
 
         private void HandleOnJump(Vector3 velocity)
         {
             if (!isLocalPlayer) return;
-
             PlayLocalSound(jumpClip, 1.0f);
             CmdPlayActionSound("jump");
         }
@@ -124,10 +127,7 @@ namespace CMF
         }
 
         [Command]
-        private void CmdPlayActionSound(string type)
-        {
-            RpcPlayActionSound(type);
-        }
+        private void CmdPlayActionSound(string type) => RpcPlayActionSound(type);
 
         [ClientRpc(includeOwner = false)]
         private void RpcPlayActionSound(string type)
@@ -139,15 +139,10 @@ namespace CMF
             }
         }
 
-        #endregion
-
-        // Método centralizado para reproducir sonido
         private void PlayLocalSound(AudioClip clip, float volume)
         {
             if (clip != null && audioSource != null)
-            {
                 audioSource.PlayOneShot(clip, volume);
-            }
         }
     }
 }
