@@ -1,97 +1,102 @@
 using UnityEngine;
 using Mirror;
 
-// Cambiamos MonoBehaviour por NetworkBehaviour
 public class CogerObjeto : NetworkBehaviour
 {
     public GameObject handPoint;
     private GameObject pickedObject = null;
-    private GameObject objectInRange = null; 
+    private GameObject objectInRange = null;
 
     void Update()
     {
-        // MUY IMPORTANTE: Solo queremos que el jugador local pueda usar estas teclas.
-        // Evita que al pulsar 'E', todos los clones de tu personaje intenten coger algo.
         if (!isLocalPlayer) return;
 
         // SOLTAR OBJETO
         if (pickedObject != null && Input.GetKeyDown(KeyCode.Q))
         {
-            CmdDropObject(); // Le pedimos al servidor que suelte el objeto
+            NetworkIdentity netId = pickedObject.GetComponent<NetworkIdentity>();
+            if (netId != null)
+            {
+                CmdDropObject(netId);
+            }
         }
 
         // COGER OBJETO
         if (objectInRange != null && pickedObject == null && Input.GetKeyDown(KeyCode.E))
         {
-            // Buscamos la identidad de red del objeto para pasársela al servidor
             NetworkIdentity netId = objectInRange.GetComponent<NetworkIdentity>();
-            if (netId != null)
+            
+            // Solo intentamos cogerlo si nadie más tiene la autoridad (nadie más lo tiene en la mano)
+            if (netId != null && netId.connectionToClient == null)
             {
-                CmdPickUpObject(netId); // Le pedimos al servidor coger este objeto exacto
+                CmdPickUpObject(netId);
             }
         }
     }
 
-    // [Command] se ejecuta SOLO en el Servidor (El host)
     [Command]
     private void CmdPickUpObject(NetworkIdentity objNetId)
     {
-        // Opcional: Aquí podrías comprobar si el objeto ya ha sido cogido por otro jugador
-        // para evitar que dos personas lo cojan a la vez.
-
-        // El servidor le dice a TODOS los clientes que este jugador agarró el objeto
+        // 1. Le damos AUTORIDAD de red a este jugador para que sus físicas manden
+        objNetId.AssignClientAuthority(connectionToClient);
+        
+        // 2. Avisamos a todos para que lo emparenten a la mano
         RpcPickUpObject(objNetId);
     }
 
-    // [ClientRpc] lo reciben TODOS los jugadores de la partida al mismo tiempo
     [ClientRpc]
     private void RpcPickUpObject(NetworkIdentity objNetId)
     {
         pickedObject = objNetId.gameObject;
         Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
 
-        // Desactivamos físicas para que no se caiga ni colisione loco en la mano
         if (rb != null)
         {
-            rb.isKinematic = true;
+            rb.isKinematic = true;  // Apagamos físicas en la mano
             rb.useGravity = false;
         }
 
-        // Lo emparentamos a la mano de ESTE personaje en la pantalla de todos
         pickedObject.transform.SetParent(handPoint.transform);
         pickedObject.transform.localPosition = Vector3.zero;
         pickedObject.transform.localRotation = Quaternion.identity;
     }
 
     [Command]
-    private void CmdDropObject()
+    private void CmdDropObject(NetworkIdentity objNetId)
     {
-        if (pickedObject != null)
-        {
-            RpcDropObject(); // El servidor ordena a todos soltarlo
-        }
+        // 1. Avisamos a todos de que lo suelten y enciendan las físicas
+        RpcDropObject(objNetId);
+
+        // 2. Le QUITAMOS la autoridad al jugador para que el Servidor vuelva a calcular la caída
+        objNetId.RemoveClientAuthority();
     }
 
     [ClientRpc]
-    private void RpcDropObject()
+    private void RpcDropObject(NetworkIdentity objNetId)
     {
-        if (pickedObject == null) return;
+        if (objNetId == null) return;
 
-        Rigidbody rb = pickedObject.GetComponent<Rigidbody>();
+        GameObject objToDrop = objNetId.gameObject;
+        Rigidbody rb = objToDrop.GetComponent<Rigidbody>();
+        
+        // ¡Aquí recupera las físicas en todas las pantallas!
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.useGravity = true;
         }
 
-        pickedObject.transform.SetParent(null);
-        pickedObject = null;
+        objToDrop.transform.SetParent(null);
+
+        // Limpiamos la variable solo para el jugador que lo tenía agarrado
+        if (pickedObject == objToDrop)
+        {
+            pickedObject = null;
+        }
     }
 
-    // Detectamos si entramos o salimos de la zona del objeto
     private void OnTriggerEnter(Collider other)
     {
-        // Solo el jugador local necesita detectar la colisión para que le aparezca el prompt de coger
         if (!isLocalPlayer) return;
 
         if (other.CompareTag("Objets"))
@@ -104,12 +109,9 @@ public class CogerObjeto : NetworkBehaviour
     {
         if (!isLocalPlayer) return;
 
-        if (other.CompareTag("Objets"))
+        if (other.CompareTag("Objets") && objectInRange == other.gameObject)
         {
-            if (objectInRange == other.gameObject)
-            {
-                objectInRange = null;
-            }
+            objectInRange = null;
         }
     }
 }
