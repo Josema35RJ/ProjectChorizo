@@ -9,25 +9,54 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnClientSceneChanged()
     {
-        // No llamamos a base.OnClientSceneChanged() para tener control total o 
-        // lo llamamos al final. Aquí bloqueamos el cursor.
         base.OnClientSceneChanged();
-
-        ConfigurarCursor();
-        Debug.Log("CLIENTE: Escena cambiada y cursor configurado.");
+        ConfigurarCursor(true);
+        Debug.Log("CLIENTE: Escena cambiada y cursor bloqueado.");
     }
 
     public override void OnServerSceneChanged(string sceneName)
     {
         base.OnServerSceneChanged(sceneName);
-        ConfigurarCursor();
+        ConfigurarCursor(true);
         Debug.Log($"SERVIDOR: Escena cambiada a {sceneName}");
     }
 
-    private void ConfigurarCursor()
+    private void ConfigurarCursor(bool bloqueado)
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = !bloqueado;
+        Cursor.lockState = bloqueado ? CursorLockMode.Locked : CursorLockMode.None;
+    }
+
+    // --- CONTROL DE CONEXIÓN Y LIMPIEZA (Anti-NullReference) ---
+
+    public override void OnStopServer()
+    {
+        base.OnStopServer();
+        ConfigurarCursor(false); // Liberamos el cursor al cerrar el server
+        LimpiarTransporte();
+    }
+
+    public override void OnStopClient()
+    {
+        base.OnStopClient();
+        ConfigurarCursor(false); // Liberamos el cursor al salir
+    }
+
+    private void LimpiarTransporte()
+    {
+        // Esto evita que FizzySteam intente cerrar sockets nulos o ya cerrados
+        if (transport is Mirror.FizzySteam.FizzyFacepunch fizzy)
+        {
+            try
+            {
+                fizzy.Shutdown();
+                Debug.Log("SERVIDOR: Transporte Steam cerrado correctamente.");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogWarning($"Limpieza de transporte omitida: {e.Message}");
+            }
+        }
     }
 
     // --- CARGA DE JUEGO ---
@@ -36,24 +65,25 @@ public class CustomNetworkManager : NetworkManager
     {
         if (NetworkServer.active)
         {
-            // Es buena práctica usar ServerChangeScene directamente si no necesitas el delay.
-            // Si necesitas el delay de 3s, Invoke está bien.
+            // Usamos Invoke para dar un margen de tiempo antes de la transición
             Invoke(nameof(ChangingScene), 3f);
         }
     }
 
     private void ChangingScene()
     {
+        // Cambia el nombre "GameScene" por el nombre exacto de tu escena de juego
         ServerChangeScene("GameScene");
     }
 
+    // --- GESTIÓN DE JUGADORES ---
 
     public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
-
+        // Previene el error "Already a player for this connection"
         if (conn.identity != null)
         {
-            Debug.LogWarning($"[Mirror] El cliente {conn.connectionId} ya tiene un jugador. Saltando OnServerAddPlayer.");
+            Debug.LogWarning($"[Mirror] El cliente {conn.connectionId} ya tiene un jugador. Saltando spawn.");
             return;
         }
 
@@ -65,20 +95,19 @@ public class CustomNetworkManager : NetworkManager
     public override void OnServerConnect(NetworkConnectionToClient conn)
     {
         base.OnServerConnect(conn);
-        Debug.Log("<color=green>SERVIDOR: Un cliente se ha conectado a Mirror exitosamente.</color>");
+        Debug.Log("<color=green>SERVIDOR: Cliente conectado.</color>");
     }
 
     public override void OnClientConnect()
     {
-        // IMPORTANTE: Si usas AddPlayer manual en algún sitio, aquí es donde suele romperse.
-        // Como dependemos del "Auto Create Player" del Inspector, solo llamamos al base.
         base.OnClientConnect();
-        Debug.Log("<color=blue>CLIENTE: Me he conectado al Host de Mirror.</color>");
+        Debug.Log("<color=blue>CLIENTE: Conectado al Host.</color>");
     }
 
     public override void OnClientDisconnect()
     {
         base.OnClientDisconnect();
-        Debug.Log("<color=red>CLIENTE: Desconectado o conexión fallida.</color>");
+        ConfigurarCursor(false);
+        Debug.Log("<color=red>CLIENTE: Desconectado del servidor.</color>");
     }
 }
