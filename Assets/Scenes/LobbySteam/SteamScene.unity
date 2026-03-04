@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 875813018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 165515e415986ad48aac758f7681d41e, type: 3}
+  m_Script: {fileID: 11500000, guid: 0092e81c8cab2de45b8b33a9e3dd0333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mirror.FizzySteam.FizzyFacepunch
   Channels: 0200000001000000
@@ -2228,7 +2228,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1919424402}
   m_HandleRect: {fileID: 1919424401}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
