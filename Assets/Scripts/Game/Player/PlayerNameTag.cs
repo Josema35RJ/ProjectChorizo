@@ -8,6 +8,7 @@ using Unity.Services.Authentication;
 using System;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections;
 
 public class PlayerNameTag : NetworkBehaviour
 {
@@ -21,27 +22,41 @@ public class PlayerNameTag : NetworkBehaviour
     [SyncVar(hook = nameof(OnNameChanged))]
     public string playerName;
 
+    // Estados de control para evitar errores de Vivox
+    private static bool _estaInicializandoServicios = false;
+    private static bool _estaLogueandoVivox = false;
+
     private float nextSpatialUpdate;
     private const float spatialUpdateRate = 0.1f;
 
     public override void OnStartLocalPlayer()
     {
+        // 1. Configurar nombre desde Steam o Random
         string steamName = SteamClient.IsValid ? SteamClient.Name : "Jugador_" + UnityEngine.Random.Range(100, 999);
         CmdSetPlayerName(steamName);
 
+        // 2. Iniciar Vivox de forma segura
         _ = IniciarVoz(steamName);
     }
 
     [Command] void CmdSetPlayerName(string name) => playerName = name;
-    void OnNameChanged(string old, string n) => nameTag.text = n;
+
+    void OnNameChanged(string old, string n)
+    {
+        if (nameTag != null) nameTag.text = n;
+    }
 
     async Task IniciarVoz(string displayName)
     {
         try
         {
+            // Evitar que múltiples instancias inicialicen servicios al mismo tiempo
             if (UnityServices.State == ServicesInitializationState.Uninitialized)
             {
+                if (_estaInicializandoServicios) return;
+                _estaInicializandoServicios = true;
                 await UnityServices.InitializeAsync();
+                _estaInicializandoServicios = false;
             }
 
             if (!AuthenticationService.Instance.IsSignedIn)
@@ -49,43 +64,50 @@ public class PlayerNameTag : NetworkBehaviour
                 await AuthenticationService.Instance.SignInAnonymouslyAsync();
             }
 
+            // Evitar el error "Already signing in"
             if (!VivoxService.Instance.IsLoggedIn)
             {
+                if (_estaLogueandoVivox) return;
+                _estaLogueandoVivox = true;
+
                 var options = new LoginOptions
                 {
                     DisplayName = displayName.Replace(" ", "_"),
                     PlayerId = AuthenticationService.Instance.PlayerId
                 };
+
                 await VivoxService.Instance.LoginAsync(options);
+                _estaLogueandoVivox = false;
             }
 
-            if (!VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
+            // Unirse al canal si no estamos en él
+            if (VivoxService.Instance.IsLoggedIn && !VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
             {
-                // El modelo de audio InverseByDistance es el estándar para 3D realista
                 var properties = new Channel3DProperties(distanciaMaxima, 1, 1.0f, AudioFadeModel.InverseByDistance);
                 await VivoxService.Instance.JoinPositionalChannelAsync(channelName, ChatCapability.AudioOnly, properties);
             }
 
-            Debug.Log("<color=green>Vivox: Conectado.</color>");
+            Debug.Log("<color=green>Vivox: Conectado y en canal posicional.</color>");
         }
         catch (Exception e)
         {
+            _estaInicializandoServicios = false;
+            _estaLogueandoVivox = false;
             Debug.LogError($"Error Vivox Init: {e.Message}");
         }
     }
 
     private void Update()
     {
-        // Verificación de seguridad inicial
-        if (VivoxService.Instance == null || !VivoxService.Instance.IsLoggedIn || nameTag == null)
+        // Solo verificamos si alguien habla si Vivox está listo y el objeto tiene nombre
+        if (VivoxService.Instance == null || !VivoxService.Instance.IsLoggedIn || string.IsNullOrEmpty(playerName) || nameTag == null)
             return;
 
         bool estaHablando = false;
 
-        // Buscamos al participante en todos los canales activos
+        // Comprobamos si este jugador específico está hablando
         foreach (var channel in VivoxService.Instance.ActiveChannels.Values)
         {
-            // Buscamos por PlayerId (que es el ID único de Unity Services)
             var participant = channel.FirstOrDefault(p => p.DisplayName == playerName.Replace(" ", "_"));
             if (participant != null && participant.SpeechDetected)
             {
@@ -106,42 +128,41 @@ public class PlayerNameTag : NetworkBehaviour
                                      Camera.main.transform.rotation * Vector3.up);
         }
 
-
+        // 2. Actualizar posición 3D (Solo para el jugador local)
         if (isLocalPlayer && VivoxService.Instance != null && VivoxService.Instance.IsLoggedIn && Time.time >= nextSpatialUpdate)
         {
             nextSpatialUpdate = Time.time + spatialUpdateRate;
 
-            // Según el error, el método requiere estos 6 parámetros:
-            VivoxService.Instance.Set3DPosition(
-                transform.position,     // speakerPos: donde sale tu voz
-                transform.position,     // listenerPos: donde escuchas (tus oídos)
-                transform.forward,      // forward: hacia donde miras
-                transform.up,           // up: vector hacia arriba
-                channelName,            // channelName: el nombre del canal
-                true                    // updateInput: ¿actualizar el micrófono? Sí.
-            );
+            if (VivoxService.Instance.ActiveChannels.ContainsKey(channelName))
+            {
+                VivoxService.Instance.Set3DPosition(
+                    transform.position,    // speakerPos
+                    transform.position,    // listenerPos
+                    transform.forward,     // forward
+                    transform.up,          // up
+                    channelName,           // channelName
+                    true                   // updateInput
+                );
+            }
         }
     }
 
     private async void OnDestroy()
     {
-        // 1. Verificamos que sea el jugador local
-        // 2. Verificamos que la instancia de Vivox aún exista en memoria
+        // Limpieza al destruir el objeto
         if (isLocalPlayer && VivoxService.Instance != null)
         {
             try
             {
-                // Verificamos si realmente estamos logueados antes de intentar el logout
                 if (VivoxService.Instance.IsLoggedIn)
                 {
                     await VivoxService.Instance.LogoutAsync();
-                    Debug.Log("Vivox: Logout completado con éxito.");
+                    Debug.Log("Vivox: Logout completado.");
                 }
             }
             catch (Exception e)
             {
-                // Silenciamos el error si el servicio ya no está disponible al cerrar
-                Debug.LogWarning($"Vivox Logout omitido o fallido: {e.Message}");
+                Debug.LogWarning($"Vivox Logout omitido: {e.Message}");
             }
         }
     }
