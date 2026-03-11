@@ -28,6 +28,18 @@ public class PlayerNameTag : NetworkBehaviour
     private float nextSpatialUpdate;
     private const float spatialUpdateRate = 0.1f;
 
+    // --- NUEVO: Ocultamos el cartel de nuestro propio jugador ---
+    private void Start()
+    {
+        if (isLocalPlayer && nameTag != null)
+        {
+            // Apagamos completamente el objeto del Canvas que tiene el texto
+            // (Mejor apagar el padre directo (Canvas) para no renderizar nada inútil)
+            nameTag.transform.parent.gameObject.SetActive(false); 
+        }
+    }
+    // ------------------------------------------------------------
+
     public override void OnStartLocalPlayer()
     {
         // Iniciamos una corrutina para esperar a que la red esté lista
@@ -133,9 +145,10 @@ public class PlayerNameTag : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if (nameTag != null && Camera.main != null)
+        // Solo intentamos girar el cartel si no somos nosotros (ya que el nuestro lo hemos apagado en Start)
+        if (!isLocalPlayer && nameTag != null && Camera.main != null)
         {
-            nameTag.transform.LookAt(nameTag.transform.position + Camera.main.transform.rotation * Vector3.forward,
+            nameTag.transform.parent.LookAt(nameTag.transform.parent.position + Camera.main.transform.rotation * Vector3.forward,
                                      Camera.main.transform.rotation * Vector3.up);
         }
 
