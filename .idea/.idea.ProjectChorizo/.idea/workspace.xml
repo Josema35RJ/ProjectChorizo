@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="86908235-c32a-4a2e-bf39-05d9f23d30d2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player_3D.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player_3D.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerNameTag.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/PlayerNameTag.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LobbySteam/SteamScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LobbySteam/SteamScene.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <updated>1773173379673</updated>
       <workItem from="1773173395368" duration="403000" />
       <workItem from="1773213930669" duration="2145000" />
-      <workItem from="1773216422909" duration="1602000" />
+      <workItem from="1773216422909" duration="2198000" />
     </task>
     <servers />
   </component>
