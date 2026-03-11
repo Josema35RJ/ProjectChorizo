@@ -1760,6 +1760,7 @@ GameObject:
   - component: {fileID: 875813020}
   - component: {fileID: 875813019}
   - component: {fileID: 875813021}
+  - component: {fileID: 875813022}
   m_Layer: 0
   m_Name: CustomNetworkManager
   m_TagString: Untagged
@@ -1787,7 +1788,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   offlineSceneLoadDelay: 0
-  transport: {fileID: 875813021}
+  transport: {fileID: 875813022}
   networkAddress: localhost
   maxConnections: 100
   disconnectInactiveConnections: 0
@@ -1829,6 +1830,25 @@ Transform:
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &875813021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875813018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15253f17042f0054f8a26833e6c723d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Mirror.FizzySteam.FizzyFacepunch
+  Channels: 0200000001000000
+  Timeout: 25
+  SteamAppID: 480
+  AllowSteamRelay: 1
+  UseNextGenSteamNetworking: 1
+  InitFacepunch: 1
+  SteamUserID: 0
+--- !u!114 &875813022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
