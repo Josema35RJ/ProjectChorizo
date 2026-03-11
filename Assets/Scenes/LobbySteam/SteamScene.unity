@@ -1793,7 +1793,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1189618843407812, guid: 5a452a30441153e49994cd60206090c8,
+  playerPrefab: {fileID: 4839485587291960618, guid: d4b73fe6a02c8c742aa2e2283b3c0404,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 875813018}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cda1d43194745da41abba8d485bea935, type: 3}
+  m_Script: {fileID: 11500000, guid: 0092e81c8cab2de45b8b33a9e3dd0333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mirror.FizzySteam.FizzyFacepunch
   Channels: 0200000001000000
@@ -3245,7 +3245,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 72547755}
   m_HandleRect: {fileID: 72547754}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

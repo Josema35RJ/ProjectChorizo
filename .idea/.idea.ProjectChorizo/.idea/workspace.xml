@@ -6,281 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="86908235-c32a-4a2e-bf39-05d9f23d30d2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ProjectChorizo/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ProjectChorizo/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player3Rd.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player3Rd.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/GravityFlipper.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/GravityFlipper.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/GravityTunnel.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/GravityTunnel.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/MovingPlatform.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Interactive/MovingPlatform.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_2x2x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_2x2x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_4x4x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_4x4x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_4x4x4.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Cube_4x4x4.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_4x4x1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_4x4x1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_4x4x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_4x4x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_8x4x4.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Ramp_8x4x4.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_4x4x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_4x4x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x2_Small.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x2_Small.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x4.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Stair_8x4x4.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Terrain.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Terrain.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_16x16x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_16x16x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_4x4x1.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_4x4x1.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_8x8x2.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tile_8x8x2.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tunnel_18x18.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/Tunnel_18x18.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/WaveTile_20x4.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Prefabs/Environment/Static/WaveTile_20x4.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Capguy.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Capguy.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Fall.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Fall.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Idle.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Idle.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/IdleLooking.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/IdleLooking.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Jump.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Jump.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Land.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/Land.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkBackward.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkBackward.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkForward.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkForward.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkLeft.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkLeft.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkNeutral.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkNeutral.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkRight.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Animations/WalkRight.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/CapguyAnimator.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/CapguyAnimator.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Capguy.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Capguy.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Cap_Texture.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Cap_Texture.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Capguy_Texture_Body.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Capguy_Texture_Body.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Mat_Cap.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Mat_Cap.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Mat_Capguy.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Materials/Mat_Capguy.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Cap.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Cap.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Capguy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Capguy/Model/Textures/Tex_Capguy.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Black.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Black.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Default.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Default.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Dark.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Dark.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Grey.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Grey.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Orange.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Orange.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Red.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Grid_Red.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Text.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_Text.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_White.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Materials/Mat_White.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/ArrowMarker.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/ArrowMarker.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_2x2x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_2x2x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_4x4x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_4x4x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_4x4x4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Cube_4x4x4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Materials/No Name.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Materials/No Name.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Mesh_Terrain.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Mesh_Terrain.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Platform_4x4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Platform_4x4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Quadsphere.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Quadsphere.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_4x2x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_4x2x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_4x4x1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_4x4x1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_8x4x4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Ramp_8x4x4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_4x4x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_4x4x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x2_Small.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x2_Small.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Stair_8x4x4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Terrain_24x24.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Terrain_24x24.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_16x16x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_16x16x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_4x4x1.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_4x4x1.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_8x8x2.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tile_8x8x2.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tunnel_18x18.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tunnel_18x18.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tunnel_28x28.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/Tunnel_28x28.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/WaveTile_20x4.fbx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Meshes/WaveTile_20x4.fbx.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Blue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Blue.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_DarkBlue.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_DarkBlue.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Grey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Grey.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Orange.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Orange.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Red.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Red.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Yellow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Environment/Textures/Tex_Grid_Yellow.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/Attribution.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/Attribution.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/LICENSE.txt.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/Roboto-Condensed.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Fonts/Roboto-Condensed.ttf.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Physics Materials.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Physics Materials/NoFriction.physicMaterial" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Physics Materials/NoFriction.physicMaterial.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Shaders.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Shaders/OneSidedTextShader.shader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Misc/Shaders/OneSidedTextShader.shader.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/AnimationControl.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/AnimationControl.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/AudioControl.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/AudioControl.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardCameraDirection.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardCameraDirection.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardControllerVelocity.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardControllerVelocity.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardTransformDirection.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Animation &amp; Audio/TurnTowardTransformDirection.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/CameraController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/CameraController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/CameraDistanceRaycaster.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/CameraDistanceRaycaster.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/ThirdPersonCameraController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Camera/ThirdPersonCameraController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/AdvancedWalkerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/AdvancedWalkerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/ClickToMoveController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/ClickToMoveController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/Controller.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/Controller.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/SidescrollerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/SidescrollerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/SimpleWalkerController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Controllers/SimpleWalkerController.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/CeilingDetector.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/CeilingDetector.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/Mover.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/Mover.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/Sensor.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Core scripts/Sensor.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Editor/MoverInspector.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Editor/MoverInspector.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/FlipAtRightAngle.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/FlipAtRightAngle.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/GravityTunnel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/GravityTunnel.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/MovingPlatform.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/MovingPlatform.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/TriggerArea.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Environment/TriggerArea.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Helper.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Helper/VectorMath.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Helper/VectorMath.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraJoystickInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraJoystickInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraMouseInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Camera/CameraMouseInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterJoystickInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterJoystickInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/AlignRigidbodyToTarget.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/AlignRigidbodyToTarget.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/DemoMenu.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/DemoMenu.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/DisableShadows.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/DisableShadows.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/FPSCounter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/FPSCounter.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/MouseCursorLock.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/MouseCursorLock.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/PlayerData.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/PlayerData.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/RotateObject.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Showcase/RotateObject.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Smoothing.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Smoothing/SmoothPosition.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Smoothing/SmoothPosition.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Smoothing/SmoothRotation.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Smoothing/SmoothRotation.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Click.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Click.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Footstep.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Footstep.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Footstep_02.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Footstep_02.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Jump.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Jump.wav.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Land.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Sounds/Audio_Land.wav.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game/GameScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/LobbySteam/SteamScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/LobbySteam/SteamScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/Player/LocalComponentChecker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/Player/LocalComponentChecker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Anton SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Bangers SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Electronic Highway Sign SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Examples &amp; Extras/Resources/Fonts &amp; Materials/Roboto-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterKeyboardInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_StoreAssets/Character Movement Fundamentals/Source/Scripts/Input/Character/CharacterKeyboardInput.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
     </list>
@@ -296,31 +29,32 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="3Ali5vaz5xNJJkHHyFx1NenRfmi" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "primera-persona",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;primera-persona&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Standalone Player.Start Unity">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.3.8f1\Editor\Unity.exe" />
@@ -367,6 +101,8 @@
       <option name="presentableId" value="Default" />
       <updated>1773173379673</updated>
       <workItem from="1773173395368" duration="403000" />
+      <workItem from="1773213930669" duration="2145000" />
+      <workItem from="1773216422909" duration="412000" />
     </task>
     <servers />
   </component>
